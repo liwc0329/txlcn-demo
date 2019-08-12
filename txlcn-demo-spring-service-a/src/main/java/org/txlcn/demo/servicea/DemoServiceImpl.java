@@ -11,7 +11,6 @@ import org.txlcn.demo.common.spring.ServiceBClient;
 import org.txlcn.demo.common.spring.ServiceCClient;
 
 import java.util.Date;
-import java.util.Objects;
 
 /**
  * Description:
@@ -41,6 +40,9 @@ public class DemoServiceImpl implements DemoService {
 
     @Override
     public String execute(String value, String exFlag) {
+        log.info("正在执行a..................................");
+
+
         // step1. call remote ServiceD
 //        String dResp = serviceBClient.rpc(value);
 
@@ -56,12 +58,6 @@ public class DemoServiceImpl implements DemoService {
         demo.setCreateTime(new Date());
         demo.setAppName(Transactions.getApplicationId());
         demoMapper.save(demo);
-
-        // 置异常标志，DTX 回滚
-        if (Objects.nonNull(exFlag)) {
-            throw new IllegalStateException("by exFlag");
-        }
-
-        return dResp + " > " + eResp + " > " + "ok-service-a";
+        throw new IllegalStateException("by exFlag a");
     }
 }

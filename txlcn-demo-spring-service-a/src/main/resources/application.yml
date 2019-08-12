@@ -1,0 +1,50 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8050/eureka
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    prefer-ip-address: true
+logging:
+  level:
+    com:
+      codingapi:
+        txlcn: debug
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    use-generated-keys: true
+ribbon:
+  ReadTimeout: 50000
+  ConnectTimeout: 3000
+hystrix:
+  threadpool:
+    default:
+      coreSize: 1
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1000
+server:
+  port: 12011
+spring:
+  application:
+    name: txlcn-demo-spring-service-a
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      maximum-pool-size: 20
+    password: 1105lwc
+    url: jdbc:mysql://127.0.0.1:3306/txlcn-demo?characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+tx-lcn:
+  client:
+    manager-address: 127.0.0.1:8070
+  ribbon:
+    loadbalancer:
+      dtx:
+        enabled: true

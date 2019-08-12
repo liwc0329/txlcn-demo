@@ -7,6 +7,6 @@ package org.txlcn.demo.servicec;
  * @author ujued
  */
 public interface DemoService {
-    
+
     String rpc(String value);
 }

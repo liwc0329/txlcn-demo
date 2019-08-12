@@ -25,6 +25,4 @@ public class DemoController {
     public String execute(@RequestParam("value") String value, @RequestParam(value = "ex", required = false) String exFlag) {
         return demoService.execute(value, exFlag);
     }
-
-
 }

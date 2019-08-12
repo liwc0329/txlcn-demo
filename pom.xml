@@ -12,11 +12,7 @@
 
     <modules>
         <module>txlcn-demo-common</module>
-
-        <module>txlcn-demo-dubbo-service-a</module>
-        <module>txlcn-demo-dubbo-service-b</module>
-        <module>txlcn-demo-dubbo-service-c</module>
-
+        
         <module>txlcn-demo-spring-service-a</module>
         <module>txlcn-demo-spring-service-b</module>
         <module>txlcn-demo-spring-service-c</module>
@@ -94,7 +90,6 @@
 
         </dependencies>
     </dependencyManagement>
-
 
 
 </project>

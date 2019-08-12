@@ -33,14 +33,14 @@ public class DemoServiceImpl implements DemoService {
     @TxcTransaction(propagation = DTXPropagation.SUPPORTS)
     @Transactional
     public String rpc(String value) {
-
-
+        log.info("正在执行b..................................");
         Demo demo = new Demo();
         demo.setGroupId(TracingContext.tracing().groupId());
         demo.setDemoField(value);
         demo.setAppName(Transactions.getApplicationId());
         demo.setCreateTime(new Date());
         demoMapper.save(demo);
-        return "ok-service-b";
+        log.info("执行b完成待返回..................................");
+        return "b success";
     }
 }

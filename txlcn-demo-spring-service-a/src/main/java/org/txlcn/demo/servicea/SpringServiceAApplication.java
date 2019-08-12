@@ -3,7 +3,6 @@ package org.txlcn.demo.servicea;
 import com.codingapi.txlcn.tc.config.EnableDistributedTransaction;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
@@ -14,7 +13,6 @@ import org.springframework.web.client.RestTemplate;
  * @author ujued
  */
 @SpringBootApplication
-@EnableDiscoveryClient
 @EnableDistributedTransaction
 public class SpringServiceAApplication {
 

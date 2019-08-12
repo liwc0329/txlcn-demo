@@ -3,7 +3,6 @@ package org.txlcn.demo.servicec;
 import com.codingapi.txlcn.common.util.Transactions;
 import com.codingapi.txlcn.tc.annotation.DTXPropagation;
 import com.codingapi.txlcn.tc.annotation.TccTransaction;
-import com.codingapi.txlcn.tc.support.DTXUserControls;
 import com.codingapi.txlcn.tracing.TracingContext;
 import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
@@ -39,15 +38,17 @@ public class DemoServiceImpl implements DemoService {
     @TccTransaction(propagation = DTXPropagation.SUPPORTS)
     @Transactional
     public String rpc(String value) {
+        log.info("正在执行c..................................");
         Demo demo = new Demo();
         demo.setDemoField(value);
         demo.setCreateTime(new Date());
-        demo.setAppName(Transactions.getApplicationId());
+        demo.setAppName(Transactions.getApplicationId());git remote rm origin
         demo.setGroupId(TracingContext.tracing().groupId());
         demoMapper.save(demo);
         ids.putIfAbsent(TracingContext.tracing().groupId(), Sets.newHashSet(demo.getId()));
         ids.get(TracingContext.tracing().groupId()).add(demo.getId());
-        return "ok-service-c";
+        log.info("正在执行c..................................");
+        return "c success";
     }
 
     public void confirmRpc(String value) {
@@ -61,6 +62,7 @@ public class DemoServiceImpl implements DemoService {
         ids.get(TracingContext.tracing().groupId()).forEach(id -> {
             log.info("tcc-cancel-{}-{}", TracingContext.tracing().groupId(), id);
             demoMapper.deleteByKId(id);
+            throw new IllegalStateException("by exFlag cancelRpc");
         });
     }
 }
