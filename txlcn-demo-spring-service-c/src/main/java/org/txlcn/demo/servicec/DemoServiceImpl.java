@@ -8,7 +8,6 @@ import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.txlcn.demo.common.db.domain.Demo;
 
 import java.util.Date;
@@ -36,18 +35,21 @@ public class DemoServiceImpl implements DemoService {
 
     @Override
     @TccTransaction(propagation = DTXPropagation.SUPPORTS)
-    @Transactional
+//    @Transactional
     public String rpc(String value) {
         log.info("正在执行c..................................");
         Demo demo = new Demo();
         demo.setDemoField(value);
         demo.setCreateTime(new Date());
-        demo.setAppName(Transactions.getApplicationId());git remote rm origin
+        demo.setAppName(Transactions.getApplicationId());
         demo.setGroupId(TracingContext.tracing().groupId());
         demoMapper.save(demo);
         ids.putIfAbsent(TracingContext.tracing().groupId(), Sets.newHashSet(demo.getId()));
         ids.get(TracingContext.tracing().groupId()).add(demo.getId());
         log.info("正在执行c..................................");
+//        if (true) {
+//            throw new RuntimeException("fail c");
+//        }
         return "c success";
     }
 

@@ -40,6 +40,11 @@ public class DemoServiceImpl implements DemoService {
         demo.setAppName(Transactions.getApplicationId());
         demo.setCreateTime(new Date());
         demoMapper.save(demo);
+
+        if (true) {
+            throw new RuntimeException("fail b");
+        }
+
         log.info("执行b完成待返回..................................");
         return "b success";
     }
